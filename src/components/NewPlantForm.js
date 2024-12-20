@@ -8,22 +8,34 @@ function NewPlantForm({ setPlants }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newPlant = { name, image, price };
+    // Create the new plant object without setting an ID
+    const newPlant = { name, image, price: parseFloat(price) };
 
-    // Send new plant to the backend API
-    fetch("http://localhost:6001/plants", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPlant),
-    })
+    // Fetch the current plants to get the last id and increment it
+    fetch("http://localhost:6001/plants")
       .then((response) => response.json())
-      .then((newPlant) => {
-        setPlants((prevPlants) => [...prevPlants, newPlant]);
-        setName("");
-        setImage("");
-        setPrice("");
+      .then((data) => {
+        const lastId = data.length > 0 ? data[data.length - 1].id : 0;
+        const plantWithId = { ...newPlant, id: lastId + 1 };
+
+        // Post the new plant to the server with the correct id
+        fetch("http://localhost:6001/plants", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(plantWithId),
+        })
+          .then((response) => response.json())
+          .then((addedPlant) => {
+            // Update the state with the new plant
+            setPlants((prevPlants) => [...prevPlants, addedPlant]);
+
+            // Reset the form fields
+            setName("");
+            setImage("");
+            setPrice("");
+          });
       });
   };
 
