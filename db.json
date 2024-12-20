@@ -44,51 +44,15 @@
     },
     {
       "id": 8,
-      "name": "111",
-      "image": "222",
-      "price": 333
+      "name": "Green",
+      "image": "image",
+      "price": 12
     },
     {
-      "id": 9,
-      "name": "111",
-      "image": "222",
-      "price": 333
-    },
-    {
-      "id": 10,
-      "name": "111",
-      "image": "222",
-      "price": 333
-    },
-    {
-      "id": 11,
-      "name": "1",
-      "image": "1",
-      "price": 1
-    },
-    {
-      "id": 12,
-      "name": "1",
-      "image": "1",
-      "price": 1
-    },
-    {
-      "id": 13,
+      "id": 8,
       "name": "new",
       "image": "plant.image",
-      "price": 1000
-    },
-    {
-      "id": 14,
-      "name": "1212",
-      "image": "12121",
-      "price": 121212
-    },
-    {
-      "id": 15,
-      "name": "werew",
-      "image": "wewe",
-      "price": 232
+      "price": 12
     }
   ]
 }

@@ -5,6 +5,7 @@ import Search from "./Search";
 
 function PlantPage() {
   const [plants, setPlants] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Fetch plants on component mount
   useEffect(() => {
@@ -23,11 +24,21 @@ function PlantPage() {
       });
   };
 
+  // Handle search query change
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Filter plants based on search query
+  const filteredPlants = plants.filter((plant) =>
+    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <main>
-      <NewPlantForm setPlants={setPlants} />
-      <Search />
-      <PlantList plants={plants} onDelete={handleDelete} />
+      <NewPlantForm setPlants={setPlants} plants={plants} />
+      <Search onSearch={handleSearch} />
+      <PlantList plants={filteredPlants} onDelete={handleDelete} />
     </main>
   );
 }
